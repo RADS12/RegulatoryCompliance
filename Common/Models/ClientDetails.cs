@@ -1,9 +1,11 @@
-﻿namespace Common.Models
+﻿using Common.Interfaces;
+
+namespace Common.Models
 {
     public class ClientDetails : EntityAuditHistory
     {
         private int ClientId { get; set; }
-        private int LoanId { get; set; }
+        private int LoanNumber { get; set; }
         private string FirstName { get; set; }
         private string LastName { get; set; }
         private string AddressLine1 { get; set; }
