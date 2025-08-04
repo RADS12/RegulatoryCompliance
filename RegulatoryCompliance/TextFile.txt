@@ -1,0 +1,20 @@
+﻿Advantages of this Approach
+OCP: Add new rules without changing the engine.
+
+SRP: Each rule handles its own logic.
+
+DIP: Engine depends on abstractions.
+
+Polymorphism: Each rule can have different logic.
+
+Strategy Pattern: The rules act as strategies, selected at runtime.
+
+----------
+
+[Controller]
+     |
+     V
+[RegulatoryRulesEngine]---Dictionary--->[IRegulatoryRule (per type)]
+     |
+     V
+[Config]
