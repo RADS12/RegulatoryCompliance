@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BusinessManager\RuleEngine.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\SqlManager\SqlManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

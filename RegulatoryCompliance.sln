@@ -5,11 +5,11 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegulatoryCompliance", "RegulatoryCompliance\RegulatoryCompliance.csproj", "{DB25EED2-39A9-4B94-B736-745114F95ADD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0BDDBEBD-D1CA-49B1-ABA6-0EC24EEA748F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{0BDDBEBD-D1CA-49B1-ABA6-0EC24EEA748F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleEngine", "BusinessManager\RuleEngine.csproj", "{283C40E6-E5FC-4B64-8ED8-FBB41EB5E92A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuleEngine", "BusinessManager\RuleEngine.csproj", "{283C40E6-E5FC-4B64-8ED8-FBB41EB5E92A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlManager", "SqlManager\SqlManager.csproj", "{59208F07-BCB3-4F79-864E-B3F63518B668}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlManager", "SqlManager\SqlManager.csproj", "{59208F07-BCB3-4F79-864E-B3F63518B668}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

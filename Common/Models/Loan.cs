@@ -2,7 +2,7 @@
 
 namespace Common.Models
 {
-    public abstract class LoanBase : EntityAuditHistory
+    public abstract class Loan : EntityAuditHistory
     {
         public int LoanId { get; set; }
         public long LoanNumber { get; set; }
