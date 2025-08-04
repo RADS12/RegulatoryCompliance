@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RegulatoryCompliance.Interfaces;
+using Common.Interfaces;
 
 namespace RegulatoryCompliance.Controllers
 {

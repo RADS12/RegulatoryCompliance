@@ -7,8 +7,8 @@ namespace Common.Models
         public StateRegulatoryTestInput() : base(RegulatoryTestType.StateRegulatoryTest)
         {
         }
-        public long StateRegulatoryTestInputId { get; set; }
-        public new long? ReggieRequestId { get; set; }
+
+        public int LoanNumber { get; set; }
         public string State { get; set; }
         public decimal? InitialLockDateIndex { get; set; }
         public decimal? ClosingDateIndex { get; set; }

@@ -1,6 +1,6 @@
-using RegulatoryCompliance.Configuration;
-using RegulatoryCompliance.Helpers;
-using RegulatoryCompliance.Interfaces;
+using Common.Configuration;
+using Common.Helpers;
+using Common.Interfaces;
 using RuleEngine.Facade;
 using RuleEngine.Interfaces;
 
@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+builder.Services.Configure<AppSettingsConfig>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddSingleton<IAppSettingsService, AppSettingsService>();
 
 builder.Services.AddTransient<IRegulatoryRuleFacade, SafeHarborRuleFacade>();

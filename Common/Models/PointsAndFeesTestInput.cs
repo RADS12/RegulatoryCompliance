@@ -4,6 +4,8 @@ namespace Common.Models
 {
     public class PointsAndFeesTestInput : RegulatoryTestInput
     {
+        public int LoanNumber { get; set; }
+
         // Point & Fees specific properties
         public decimal PointsPaid { get; set; }
         public decimal OtherFees { get; set; }
