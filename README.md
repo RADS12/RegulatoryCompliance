@@ -1,22 +1,28 @@
-**Project Overview**
-I developed this project using Object-Oriented Programming (OOP), SOLID principles, key design patterns, multithread-safe operations, and a robust caching mechanism.
+**Project Overview:**
+
+I developed this project using 
+- Object-Oriented Programming (OOP)
+- SOLID principles
+- Key design patterns
+- Multithread-safe operations
+- Robust caching mechanism
 
 -------
 
 **Object-Oriented Principles:**
+
 **Inheritance / Polymorphism:** Implemented through base and derived input classes.
 
 **Encapsulation:** Data and logic are contained within dedicated classes.
 
 **Polymorphism:** Each rule encapsulates distinct logic and behavior.
 
-**Abstract:** Simplified complex systems by exposing only essential features and hiding internal implementation details.
-
-**Configuration Management:** Uses POCO classes and dependency injection to load settings from appsettings.json, supporting microservice-ready configurations.
+**Abstraction:** Simplified complex systems by exposing only essential features and hiding internal implementation details.
 
 -------
 
 **SOLID Principles:**
+
 **Single Responsibility:** Each class serves a single purpose (e.g., test input, configuration, test logic). Each rule is self-contained.
 
 **Open/Closed:** New regulatory tests and rules can be added without modifying existing code, enhancing extensibility.
@@ -30,6 +36,7 @@ I developed this project using Object-Oriented Programming (OOP), SOLID principl
 -----------
 
 **Design Patterns:**
+
 **Strategy Pattern:** Regulatory rules are implemented as strategies, selected dynamically at runtime.
 
 **Repository Pattern:** Abstracts database operations, improving data access flexibility.
@@ -41,31 +48,11 @@ I developed this project using Object-Oriented Programming (OOP), SOLID principl
 -------
 
 **Additional Features**
+
+**Configuration Management:** Uses POCO classes and dependency injection to load settings from appsettings.json, supporting microservice-ready configurations.
+
 **Caching:** Enhances application performance by reducing redundant operations.
 
 **SemaphoreSlim:** Ensures thread-safe operations and manages concurrent access for multithreading.
 
 --------
-=======
-I created  this project to show my understanding about OOPs, Solid, Design pattern etc.
---
-
-**SOLID Principal:**
-- S (Single Responsibility): Each class has one responsibility (test input, config, test logic, etc.)
-- O (Open/Closed): New regulatory tests can be added without modifying existing code.
-- L (Liskov): Derived test input classes can be used wherever the base is expected.
-- I (Interface Segregation): Separate interfaces for configuration and composite tests.
-- D (Dependency Inversion): Services depend on abstractions, not concretions.
-
-**Object Orineted Principles:**
-- Inheritance/Polymorphism: Used for base/derived input classes.
-- Encapsulation: Data and logic are kept within classes.
-- Polymorphism: Each rule can have different logic.
-
-**Design Pattern:**
-- Strategy Pattern: The rules act as strategies, selected at runtime.
-- Facade: To run different regulatory complaince rules
-- Dependcy Injection: Read appsettings configuaration.
-
-**Other Benefits:**
-- Configuration from appsettings.json: Via POCO and DI, enabling microservice-friendly config.
