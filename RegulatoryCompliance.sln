@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuleEngine", "BusinessManager\RuleEngine.csproj", "{283C40E6-E5FC-4B64-8ED8-FBB41EB5E92A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlManager", "SqlManager\SqlManager.csproj", "{59208F07-BCB3-4F79-864E-B3F63518B668}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{283C40E6-E5FC-4B64-8ED8-FBB41EB5E92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{283C40E6-E5FC-4B64-8ED8-FBB41EB5E92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{283C40E6-E5FC-4B64-8ED8-FBB41EB5E92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59208F07-BCB3-4F79-864E-B3F63518B668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59208F07-BCB3-4F79-864E-B3F63518B668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59208F07-BCB3-4F79-864E-B3F63518B668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59208F07-BCB3-4F79-864E-B3F63518B668}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
