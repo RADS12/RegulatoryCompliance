@@ -41,9 +41,13 @@ I developed this project using
 
 **Repository Pattern:** Abstracts database operations, improving data access flexibility.
 
+**Composite Pattern:** State regulatory Rule can contain several sub-tests
+
 **Facade Pattern:** Simplifies execution of various regulatory compliance rules.
 
 **Dependency Injection:** Injects configuration and services, promoting testability and maintainability.
+
+**Future Additions:** Factory Pattern, Chain of Responsibility Pattern, Observer Pattern, Adapter Pattern, etc.
 
 -------
 
