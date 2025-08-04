@@ -59,4 +59,6 @@ I developed this project using
 
 **SemaphoreSlim:** Ensures thread-safe operations and manages concurrent access for multithreading.
 
+**Dapper:** Automatically map query results to objects, reducing boilerplate code, improving productivity, and offering significantly faster data access compared to manual ADO.NET operations.
+
 --------
