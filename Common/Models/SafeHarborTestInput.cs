@@ -8,6 +8,7 @@ namespace Common.Models
         {
         }
 
+        private int LoanNumber { get; set; }
         public bool HasPrepaymentPenalty { get; set; }
 
         public override bool Validate()
