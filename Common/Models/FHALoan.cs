@@ -2,7 +2,7 @@
 
 namespace Common.Models
 {
-    public class FHALoan : LoanBase
+    public class FHALoan : Loan
     {
         public override string LoanType => LoanTypes.FHA.ToString();
 

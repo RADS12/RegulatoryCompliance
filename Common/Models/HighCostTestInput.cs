@@ -4,6 +4,7 @@ namespace Common.Models
 {
     public class HighCostTestInput : RegulatoryTestInput
     {
+        public int LoanNumber { get; set; }
         public bool HasBalloonPayment { get; set; }
         public bool HasNegativeAmortization { get; set; }
 

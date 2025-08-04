@@ -2,7 +2,7 @@
 
 namespace Common.Models
 {
-    public class ConventionalLoan : LoanBase
+    public class ConventionalLoan : Loan
     {
         public override string LoanType => LoanTypes.Conventional.ToString();
 
