@@ -5,6 +5,8 @@ using RuleEngine.Interfaces;
 
 namespace RuleEngine.Facade
 {
+    //This code should be inseperate API running the rules
+    //This is a demo for simplicity.
     public class PointsAndFeesRuleFacade : IRegulatoryRuleFacade
     {
         public RegulatoryTestType RuleType => RegulatoryTestType.PointsAndFees;
@@ -24,16 +26,16 @@ namespace RuleEngine.Facade
 
             // Example: Points & Fees cannot exceed a percentage of loan amount
             decimal totalFees = pfInput.PointsPaid + pfInput.OtherFees;
-            //decimal maxAllowed = pfInput.LoanAmount * config.PointsAndFeesMaxPercentage;
-            //bool passed = totalFees <= maxAllowed;
+            decimal maxAllowed = pfInput.LoanAmount * 0.05M;
+            bool response = totalFees <= maxAllowed;
 
             return new RegulatoryTestResult
             {
                 TestType = RuleType,
-                //IsPassed = passed,
-                //Message = passed
-                //    ? "Points & Fees Test Passed"
-                //    : $"Points & Fees exceed the allowed maximum ({maxAllowed:C})."
+                IsPassed = response,
+                Message = response
+                    ? "Points & Fees Test Passed"
+                    : $"Points & Fees exceed the allowed maximum ({maxAllowed:C})."
             };
         }
     }
