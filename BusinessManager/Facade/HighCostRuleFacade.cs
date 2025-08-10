@@ -5,6 +5,8 @@ using RuleEngine.Interfaces;
 
 namespace RuleEngine.Facade
 {
+    //This code should be inseperate API running the rules
+    //This is a demo for simplicity.
     public class HighCostRuleFacade : IRegulatoryRuleFacade
     {
         public RegulatoryTestType RuleType => RegulatoryTestType.HighCost;
@@ -23,15 +25,15 @@ namespace RuleEngine.Facade
             }
 
             // Example business rules
-            bool noBalloon = !hcInput.HasBalloonPayment;
+            bool response = !hcInput.HasBalloonPayment;
             //bool withinTerm = hcInput.TermYears <= config.MaxLoanTermYears;
             //bool passed = noBalloon && withinTerm;
 
             return new RegulatoryTestResult
             {
                 TestType = RuleType,
-                //IsPassed = passed,
-                //Message = passed ? "High Cost Test Passed" : "High Cost Test Failed"
+                IsPassed = response,
+                Message = response ? "High Cost Test Passed" : "High Cost Test Failed"
             };
         }
     }
