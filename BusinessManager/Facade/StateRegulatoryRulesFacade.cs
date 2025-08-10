@@ -7,6 +7,8 @@ namespace RuleEngine.Facade
 {
     public class StateRegulatoryRulesFacade : IRegulatoryRuleFacade
     {
+        //This code should be inseperate API running the rules
+        //This is a demo for simplicity.
         public RegulatoryTestType RuleType => RegulatoryTestType.SafeHarbor;
 
         public RegulatoryTestResult RunTest(RegulatoryTestInput input, AppSettingsConfig config)
