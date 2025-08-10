@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Configuration\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Infrastructure\RegulatoryComplianceSql\" />
     <Folder Include="Common\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Models\" />

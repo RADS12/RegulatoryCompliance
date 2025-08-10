@@ -17,6 +17,12 @@ namespace RuleEngine.Facade
             _config = configService.GetConfig();
         }
 
+        public IEnumerable<RegulatoryTestResult> RunRegulatoryTests(IEnumerable<RegulatoryTestType> types, RegulatoryTestInput input)
+        {
+            foreach (var type in types)
+                yield return RunRegulatoryTests(type, input);
+        }
+
         public RegulatoryTestResult RunRegulatoryTests(RegulatoryTestType type, RegulatoryTestInput input)
         {
             if (_rules.TryGetValue(type, out var rule))
@@ -29,11 +35,6 @@ namespace RuleEngine.Facade
                 Message = "No rule found for this test type."
             };
         }
-
-        public IEnumerable<RegulatoryTestResult> RunRegulatoryTests(IEnumerable<RegulatoryTestType> types, RegulatoryTestInput input)
-        {
-            foreach (var type in types)
-                yield return RunRegulatoryTests(type, input);
-        }
+        
     }
 }

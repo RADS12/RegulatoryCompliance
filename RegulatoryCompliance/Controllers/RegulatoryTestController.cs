@@ -19,8 +19,13 @@ namespace RegulatoryCompliance.Controllers
         [HttpPost("runregulatorytests")]
         public IActionResult RunTests([FromBody] RegulatoryTestInput input, [FromQuery] RegulatoryTestType[] tests)
         {
-            var results = _rulesEngine.RunRegulatoryTests(tests, input);
-            return Ok(results);
+            try {
+                var results = _rulesEngine.RunRegulatoryTests(tests, input);
+                return Ok(results);
+            }
+            catch (Exception ex)
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }
