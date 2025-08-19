@@ -1,12 +1,18 @@
 ﻿using Common.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
     public class HighCostTestInput : RegulatoryTestInput
     {
-        public int LoanNumber { get; set; }
-        public bool HasBalloonPayment { get; set; }
-        public bool HasNegativeAmortization { get; set; }
+    [Required]
+    public int LoanNumber { get; set; }
+
+    [Required]
+    public bool HasBalloonPayment { get; set; }
+
+    [Required]
+    public bool HasNegativeAmortization { get; set; }
 
         public HighCostTestInput()
             : base(RegulatoryTestType.HighCost)

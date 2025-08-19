@@ -1,15 +1,21 @@
 ﻿using Common.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
     public class PointsAndFeesTestInput : RegulatoryTestInput
     {
-        public int LoanNumber { get; set; }
+    [Required]
+    public int LoanNumber { get; set; }
 
-        // Point & Fees specific properties
-        public decimal PointsPaid { get; set; }
-        public decimal OtherFees { get; set; }
-        public decimal APR { get; set; }
+    [Range(0, double.MaxValue)]
+    public decimal PointsPaid { get; set; }
+
+    [Range(0, double.MaxValue)]
+    public decimal OtherFees { get; set; }
+
+    [Range(0, double.MaxValue)]
+    public decimal APR { get; set; }
 
         public PointsAndFeesTestInput()
             : base(RegulatoryTestType.PointsAndFees)

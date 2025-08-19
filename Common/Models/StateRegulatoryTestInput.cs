@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
@@ -8,11 +9,17 @@ namespace Common.Models
         {
         }
 
-        public int LoanNumber { get; set; }
-        public string State { get; set; }
-        public decimal? InitialLockDateIndex { get; set; }
-        public decimal? ClosingDateIndex { get; set; }
-        public string IndexName { get; set; }
+    [Required]
+    public int LoanNumber { get; set; }
+
+    [Required]
+    public string State { get; set; }
+
+    public decimal? InitialLockDateIndex { get; set; }
+
+    public decimal? ClosingDateIndex { get; set; }
+
+    public string IndexName { get; set; }
         
         public override bool Validate()
         {

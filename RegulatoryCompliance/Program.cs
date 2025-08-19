@@ -25,7 +25,11 @@ builder.Services.AddTransient<IRegulatoryRuleFacade, StateRegulatoryRulesFacade>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
+
+// Use custom global exception handling middleware
+app.UseMiddleware<RegulatoryCompliance.Expection.ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
@@ -8,8 +9,11 @@ namespace Common.Models
         {
         }
 
-        private int LoanNumber { get; set; }
-        public bool HasPrepaymentPenalty { get; set; }
+    [Required]
+    public int LoanNumber { get; set; }
+
+    [Required]
+    public bool HasPrepaymentPenalty { get; set; }
 
         public override bool Validate()
         {
