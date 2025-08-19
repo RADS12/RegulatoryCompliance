@@ -2,7 +2,7 @@
 
 namespace SqlManager.Interfaces
 {
-    public interface IDbConectionFactory
+    public interface IDbConnectionFactory
     {
         IDbConnection CreateConnection();
     }

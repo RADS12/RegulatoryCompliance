@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace SqlManager
 {
-    public class SqlDbConnectionFactory : IDbConectionFactory, IDisposable
+    public class SqlDbConnectionFactory : IDbConnectionFactory, IDisposable
     {
         private bool _disposed;
         private readonly string _connString;

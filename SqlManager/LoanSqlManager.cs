@@ -7,19 +7,19 @@ namespace SalManager
 {
     public class LoanSqlManager : ILoanSqlManager
     {
-        private readonly IDbConectionFactory _connectionFactory;
+        private readonly IDbConnectionFactory _connectionFactory;
         private static readonly SemaphoreSlim _dbSemaphore = new SemaphoreSlim(5);
         private static readonly object _loanCacheLock = new object();
         private static readonly Dictionary<int, Loan> _loanCache = new Dictionary<int, Loan>();
 
-        public LoanSqlManager(IDbConectionFactory connectionFactory)
+        public LoanSqlManager(IDbConnectionFactory connectionFactory)
         {
             _connectionFactory = connectionFactory;
         }
 
         public async Task<int> CreateLoanBase(Loan loan)
         {
-            SemaphoreSlim semaphore = new SemaphoreSlim(1);  //This will act like a locak as well
+            SemaphoreSlim semaphore = new SemaphoreSlim(1);  //This will act like a lock as well
             await semaphore.WaitAsync();
 
             try

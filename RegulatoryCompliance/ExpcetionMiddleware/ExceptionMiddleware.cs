@@ -4,7 +4,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace RegulatoryCompliance.Expection
+namespace RegulatoryCompliance.ExceptionMiddleware
 {
     public class ExceptionMiddleware
     {
