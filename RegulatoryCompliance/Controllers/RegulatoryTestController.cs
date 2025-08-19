@@ -24,6 +24,7 @@ namespace RegulatoryCompliance.Controllers
                 return Ok(results);
             }
             catch (Exception ex)
+            {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

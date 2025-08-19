@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET 9 Launch",
+      "type": "coreclr",
+      "request": "launch",
+  "preLaunchTask": "build-clean",
+      "program": "${workspaceFolder}/RegulatoryCompliance/bin/Debug/net9.0/RegulatoryCompliance.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/RegulatoryCompliance",
+      "stopAtEntry": false,
+      "console": "internalConsole"
+    }
+  ]
+}

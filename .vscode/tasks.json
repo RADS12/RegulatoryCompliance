@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "build-clean",
+				"type": "shell",
+				"command": "dotnet clean RegulatoryCompliance/RegulatoryCompliance.csproj; dotnet build RegulatoryCompliance/RegulatoryCompliance.csproj",
+				"args": [],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": "$msCompile"
+			}
+		]
+}
