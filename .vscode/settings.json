@@ -1,5 +1,12 @@
 {
+    "workbench.colorCustomizations": {
+        // "sideBar.background": "#efeffb",
+        // "sideBar.foreground": "#ffffff",
+        "terminal.background": "#e9ebf0",      // Change to your preferred color
+        "terminal.foreground": "#ce8bed"       // Optional: change text color
+    },
     "cSpell.words": [
-        "Serilog"
+        "Serilog",
+        "Xunit"
     ]
 }

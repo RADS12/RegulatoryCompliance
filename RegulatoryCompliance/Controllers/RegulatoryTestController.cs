@@ -20,6 +20,8 @@ namespace RegulatoryCompliance.Controllers
         [HttpPost("runregulatorytests")]
         public IActionResult RunTests([FromBody] RegulatoryTestInput input, [FromQuery] RegulatoryTestType[] tests)
         {
+            if (input == null)
+                return BadRequest();
             try {
                 var results = _rulesEngine.RunRegulatoryTests(tests, input);
                 return Ok(results);
