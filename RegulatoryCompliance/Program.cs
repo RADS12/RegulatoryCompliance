@@ -42,6 +42,19 @@ builder.Services.AddMiniProfiler(options =>
 
 // Add in-memory caching
 builder.Services.AddMemoryCache();
+// Add API versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;
+});
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 // JWT Authentication configuration
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "YourSuperSecretKeyHere";
 builder.Services.AddAuthentication(options =>
@@ -80,6 +93,17 @@ builder.Services.AddTransient<IRegulatoryRuleFacade, StateRegulatoryRulesFacade>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    // Add versioning to Swagger
+    var provider = builder.Services.BuildServiceProvider().GetRequiredService<Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider>();
+    foreach (var description in provider.ApiVersionDescriptions)
+    {
+        c.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo
+        {
+            Title = $"RegulatoryCompliance API {description.ApiVersion}",
+            Version = description.ApiVersion.ToString(),
+        });
+    }
+
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. Example: 'Authorization: Bearer {token}'",
@@ -122,8 +146,15 @@ app.UseMiddleware<RegulatoryCompliance.ExceptionMiddleware.ExceptionMiddleware>(
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    var apiVersionProvider = app.Services.GetRequiredService<Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider>();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        foreach (var description in apiVersionProvider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"API {description.GroupName.ToUpperInvariant()}");
+        }
+    });
 }
 
 app.UseHttpsRedirection();
