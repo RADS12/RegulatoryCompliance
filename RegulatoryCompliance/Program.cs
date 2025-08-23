@@ -10,6 +10,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.SystemConsole;
+using Serilog.Sinks.Seq;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using Serilog.Enrichers.CorrelationId;
