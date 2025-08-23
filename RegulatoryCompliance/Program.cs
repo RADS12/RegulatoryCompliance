@@ -15,6 +15,8 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.ApplicationInsights.Extensibility;
+using StackExchange.Profiling;
+using Microsoft.Extensions.Caching.Memory;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -32,6 +34,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
 // Add Application Insights telemetry
 builder.Services.AddApplicationInsightsTelemetry();
+// Add MiniProfiler for performance profiling
+builder.Services.AddMiniProfiler(options =>
+{
+    options.RouteBasePath = "/profiler";
+});
+
+// Add in-memory caching
+builder.Services.AddMemoryCache();
 // JWT Authentication configuration
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "YourSuperSecretKeyHere";
 builder.Services.AddAuthentication(options =>
@@ -76,6 +86,8 @@ var app = builder.Build();
 app.MapHealthChecks("/health");
 // Optionally, expose Application Insights telemetry configuration for advanced scenarios
 var telemetryConfig = app.Services.GetRequiredService<TelemetryConfiguration>();
+// Use MiniProfiler middleware
+app.UseMiniProfiler();
 // Enable authentication middleware
 app.UseAuthentication();
 
