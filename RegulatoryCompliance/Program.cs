@@ -10,6 +10,8 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.SystemConsole;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -23,6 +25,8 @@ builder.Host.UseSerilog();
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<RegulatoryCompliance.Validation.HighCostTestInputValidator>();
 builder.Services.Configure<AppSettingsConfig>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddSingleton<IAppSettingsService, AppSettingsService>();
 builder.Services.AddSingleton<SqlManager.Interfaces.IDbConnectionFactory, SqlManager.SqlDbConnectionFactory>();
