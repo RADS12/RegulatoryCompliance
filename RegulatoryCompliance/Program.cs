@@ -13,7 +13,8 @@ using Serilog.Sinks.SystemConsole;
 using Serilog.Sinks.Seq;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-using Serilog.Enrichers.CorrelationId;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.ApplicationInsights.Extensibility;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -27,6 +28,28 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+// Add health checks
+builder.Services.AddHealthChecks();
+// Add Application Insights telemetry
+builder.Services.AddApplicationInsightsTelemetry();
+// JWT Authentication configuration
+var jwtKey = builder.Configuration["Jwt:Key"] ?? "YourSuperSecretKeyHere";
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "JwtBearer";
+    options.DefaultChallengeScheme = "JwtBearer";
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtKey))
+    };
+});
 builder.Host.UseSerilog();
 
 // Add services to the container.
@@ -49,6 +72,12 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+// Map health check endpoint
+app.MapHealthChecks("/health");
+// Optionally, expose Application Insights telemetry configuration for advanced scenarios
+var telemetryConfig = app.Services.GetRequiredService<TelemetryConfiguration>();
+// Enable authentication middleware
+app.UseAuthentication();
 
 // Use custom global exception handling middleware
 app.UseMiddleware<RegulatoryCompliance.ExceptionMiddleware.ExceptionMiddleware>();
