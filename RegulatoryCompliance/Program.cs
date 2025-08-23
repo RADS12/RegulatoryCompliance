@@ -12,11 +12,17 @@ using Serilog.Formatting.Compact;
 using Serilog.Sinks.SystemConsole;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using Serilog.Enrichers.CorrelationId;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
+    .Enrich.FromLogContext()
+    .Enrich.WithCorrelationId()
+    .Enrich.WithProperty("UserName", Environment.UserName)
     .WriteTo.Console()
+    .WriteTo.File(new CompactJsonFormatter(), "Logs/log-.json", rollingInterval: RollingInterval.Day)
+    .WriteTo.Seq("http://localhost:5341") // Change URL if using remote Seq server
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);

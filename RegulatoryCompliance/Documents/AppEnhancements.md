@@ -3,7 +3,8 @@
 
 ## Recommended Improvements
 
-1. **Unit and Integration Testing**: Add comprehensive tests for controllers, services, and business logic using xUnit, NUnit, or MSTest.
+1. dotnet new xunit -n RegulatoryCompliance.Tests
+dotnet add RegulatoryCompliance.Tests reference RegulatoryCompliance/RegulatoryCompliance.csproj
 2. **API Documentation**: Expand Swagger with XML comments, endpoint descriptions, and example requests/responses.
 3. **Input Validation**: Ensure all request models use data annotations or FluentValidation for robust validation.
 4. **Error Handling**: Continue refining global exception handling, including logging exceptions and returning standardized ProblemDetails.
