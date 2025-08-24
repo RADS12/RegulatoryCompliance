@@ -15,7 +15,8 @@ namespace RegulatoryCompliance.Tests
             var mockService = new Mock<IAppSettingsService>();
             mockService.Setup(s => s.AppId).Returns(123);
             mockService.Setup(s => s.AppName).Returns("TestAppName");
-            var controller = new AppSettingsTestController(mockService.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new AppSettingsTestController(mockService.Object, telemetryClient);
 
             // Act
             var result = controller.GetSettingsTest();
@@ -34,7 +35,8 @@ namespace RegulatoryCompliance.Tests
             var mockService = new Mock<IAppSettingsService>();
             mockService.Setup(s => s.AppId).Returns(0); // default int value
             mockService.Setup(s => s.AppName).Returns("TestAppName");
-            var controller = new AppSettingsTestController(mockService.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new AppSettingsTestController(mockService.Object, telemetryClient);
 
             // Act
             var result = controller.GetSettingsTest();
@@ -54,7 +56,8 @@ namespace RegulatoryCompliance.Tests
             var mockService = new Mock<IAppSettingsService>();
             mockService.Setup(s => s.AppId).Returns(123);
             mockService.Setup(s => s.AppName).Returns((string)null);
-            var controller = new AppSettingsTestController(mockService.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new AppSettingsTestController(mockService.Object, telemetryClient);
 
             // Act
             var result = controller.GetSettingsTest();
@@ -74,7 +77,8 @@ namespace RegulatoryCompliance.Tests
             var mockService = new Mock<IAppSettingsService>();
             mockService.Setup(s => s.AppId).Throws(new System.Exception("Service error"));
             mockService.Setup(s => s.AppName).Returns("TestAppName");
-            var controller = new AppSettingsTestController(mockService.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new AppSettingsTestController(mockService.Object, telemetryClient);
 
             // Act & Assert
             Assert.Throws<System.Exception>(() => controller.GetSettingsTest());

@@ -16,7 +16,8 @@ public class LoanSqlManagerTests
         var mockConnFactory = new Mock<IDbConnectionFactory>();
         var mockConn = new Mock<IDbConnection>();
         mockConnFactory.Setup(f => f.CreateConnection()).Returns(mockConn.Object);
-        var manager = new LoanSqlManager(mockConnFactory.Object);
+    var mockCache = new Moq.Mock<Microsoft.Extensions.Caching.Distributed.IDistributedCache>();
+    var manager = new LoanSqlManager(mockConnFactory.Object, mockCache.Object);
     var loan = new Common.Models.ConventionalLoan();
         // Dapper is used internally, so this is a smoke test for method call
         // You may want to mock Dapper if possible, or test for exceptions
@@ -30,7 +31,8 @@ public class LoanSqlManagerTests
         var mockConnFactory = new Mock<IDbConnectionFactory>();
         var mockConn = new Mock<IDbConnection>();
         mockConnFactory.Setup(f => f.CreateConnection()).Returns(mockConn.Object);
-        var manager = new LoanSqlManager(mockConnFactory.Object);
+    var mockCache = new Moq.Mock<Microsoft.Extensions.Caching.Distributed.IDistributedCache>();
+    var manager = new LoanSqlManager(mockConnFactory.Object, mockCache.Object);
     // Dapper is used internally, so this is a smoke test for method call
     await Assert.ThrowsAnyAsync<System.Exception>(() => manager.GetLoanBaseById(1));
     }
@@ -42,7 +44,8 @@ public class LoanSqlManagerTests
         var mockConnFactory = new Mock<IDbConnectionFactory>();
         var mockConn = new Mock<IDbConnection>();
         mockConnFactory.Setup(f => f.CreateConnection()).Returns(mockConn.Object);
-        var manager = new LoanSqlManager(mockConnFactory.Object);
+    var mockCache = new Moq.Mock<Microsoft.Extensions.Caching.Distributed.IDistributedCache>();
+    var manager = new LoanSqlManager(mockConnFactory.Object, mockCache.Object);
     var loan = new Common.Models.ConventionalLoan();
     await Assert.ThrowsAnyAsync<System.Exception>(() => manager.UpdateLoanBase(loan));
     }

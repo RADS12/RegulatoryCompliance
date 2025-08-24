@@ -10,8 +10,8 @@ namespace RegulatoryCompliance.Tests
         {
             // Arrange
             var mockEngine = new Moq.Mock<RuleEngine.Interfaces.IRegulatoryRulesEngine>();
-            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object);
-
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object, telemetryClient);
             // Act
             var result = controller.RunTests(null, new[] { Common.Enums.RegulatoryTestType.HighCost });
 
@@ -34,8 +34,8 @@ namespace RegulatoryCompliance.Tests
                 Moq.It.IsAny<Common.Enums.RegulatoryTestType[]>(),
                 Moq.It.IsAny<Common.Models.HighCostTestInput>()))
                 .Returns(new[] { testResult });
-            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object);
-
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object, telemetryClient);
             // Act
             var result = controller.RunTests(new Common.Models.HighCostTestInput(), Array.Empty<Common.Enums.RegulatoryTestType>());
 
@@ -60,7 +60,8 @@ namespace RegulatoryCompliance.Tests
                 Moq.It.IsAny<Common.Enums.RegulatoryTestType[]>(),
                 Moq.It.IsAny<Common.Models.HighCostTestInput>()))
                 .Returns(new[] { testResult });
-            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object, telemetryClient);
 
             // Act
             var result = controller.RunTests(new Common.Models.HighCostTestInput(), new[] { Common.Enums.RegulatoryTestType.HighCost });
@@ -80,7 +81,8 @@ namespace RegulatoryCompliance.Tests
                 Moq.It.IsAny<Common.Enums.RegulatoryTestType[]>(),
                 Moq.It.IsAny<Common.Models.HighCostTestInput>()))
                 .Throws(new Exception("Test Exception"));
-            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object, telemetryClient);
 
             // Act
             var result = controller.RunTests(new Common.Models.HighCostTestInput(), new[] { Common.Enums.RegulatoryTestType.HighCost });
@@ -100,7 +102,8 @@ namespace RegulatoryCompliance.Tests
                 Moq.It.IsAny<Common.Enums.RegulatoryTestType[]>(),
                 Moq.It.IsAny<Common.Models.HighCostTestInput>()))
                 .Returns(Array.Empty<Common.Models.RegulatoryTestResult>());
-            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object);
+            var telemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            var controller = new RegulatoryCompliance.Controllers.RegulatoryTestController(mockEngine.Object, telemetryClient);
 
             // Act
             var result = controller.RunTests(new Common.Models.HighCostTestInput(), Array.Empty<Common.Enums.RegulatoryTestType>());

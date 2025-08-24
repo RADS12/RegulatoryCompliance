@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Caching.Memory;
 using RuleEngine.Facade;
 using RuleEngine.Interfaces;
-// using RegulatoryCompliance.Services; // Removed due to missing namespace or assembly reference
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
@@ -144,14 +143,19 @@ builder.Services.AddSwaggerGen(c =>
 
 
 var app = builder.Build();
+
 // Map health check endpoint
 app.MapHealthChecks("/health");
+
 // Optionally, expose Application Insights telemetry configuration for advanced scenarios
 var telemetryConfig = app.Services.GetRequiredService<TelemetryConfiguration>();
+
 // Enable IP rate limiting middleware
 app.UseIpRateLimiting();
+
 // Use MiniProfiler middleware
 app.UseMiniProfiler();
+
 // Enable authentication middleware
 app.UseAuthentication();
 
@@ -179,3 +183,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
