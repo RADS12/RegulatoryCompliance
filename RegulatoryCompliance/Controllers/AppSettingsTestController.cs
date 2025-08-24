@@ -9,10 +9,12 @@ namespace RegulatoryCompliance.Controllers
     public class AppSettingsTestController : Controller
     {
         private readonly IAppSettingsService _appSettingsService;
+        private readonly Microsoft.ApplicationInsights.TelemetryClient _telemetryClient;
 
-        public AppSettingsTestController(IAppSettingsService appSettingsService)
+        public AppSettingsTestController(IAppSettingsService appSettingsService, Microsoft.ApplicationInsights.TelemetryClient telemetryClient)
         {
             _appSettingsService = appSettingsService;
+            _telemetryClient = telemetryClient;
         }
 
         [HttpGet("getsettings")]
@@ -21,7 +23,13 @@ namespace RegulatoryCompliance.Controllers
             var appId = _appSettingsService.AppId;
             var appName = _appSettingsService.AppName;
 
-            return Ok( new { appId, appName });
+            // Track custom event for settings retrieval
+            _telemetryClient.TrackEvent("AppSettingsTestRetrieved");
+
+            // Track custom metric for app name length (example)
+            _telemetryClient.TrackMetric("AppNameLength", appName?.Length ?? 0);
+
+            return Ok(new { appId, appName });
         }
     }
 }
