@@ -1,4 +1,5 @@
-﻿using Common.Models;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Common.Models;
 using Dapper;
 using SqlManager.Interfaces;
 using System.Data;
@@ -8,13 +9,15 @@ namespace SalManager
     public class LoanSqlManager : ILoanSqlManager
     {
         private readonly IDbConnectionFactory _connectionFactory;
+        private readonly Microsoft.Extensions.Caching.Distributed.IDistributedCache _distributedCache;
         private static readonly SemaphoreSlim _dbSemaphore = new SemaphoreSlim(5);
         private static readonly object _loanCacheLock = new object();
         private static readonly Dictionary<int, Loan> _loanCache = new Dictionary<int, Loan>();
 
-        public LoanSqlManager(IDbConnectionFactory connectionFactory)
+        public LoanSqlManager(IDbConnectionFactory connectionFactory, Microsoft.Extensions.Caching.Distributed.IDistributedCache distributedCache)
         {
             _connectionFactory = connectionFactory;
+            _distributedCache = distributedCache;
         }
 
         public async Task<int> CreateLoanBase(Loan loan)
@@ -61,12 +64,15 @@ namespace SalManager
 
         public async Task<Loan> GetLoanBaseById(int loanId)
         {
-            lock (_loanCacheLock)
+            // Try Redis distributed cache first
+            var cacheKey = $"loan:{loanId}";
+            var cachedLoanBytes = await _distributedCache.GetAsync(cacheKey);
+            if (cachedLoanBytes != null)
             {
-                if (_loanCache.TryGetValue(loanId, out var cachedLoan))
-                {
+                var cachedLoanJson = System.Text.Encoding.UTF8.GetString(cachedLoanBytes);
+                var cachedLoan = System.Text.Json.JsonSerializer.Deserialize<Loan>(cachedLoanJson);
+                if (cachedLoan != null)
                     return cachedLoan;
-                }
             }
 
             await _dbSemaphore.WaitAsync();
@@ -83,10 +89,15 @@ namespace SalManager
                     parameters,
                     commandType: CommandType.StoredProcedure);
 
-                lock (_loanCacheLock)
+                if (loan != null)
                 {
-                    if (loan != null)
-                        _loanCache[loanId] = loan;
+                    // Store in Redis cache
+                    var loanJson = System.Text.Json.JsonSerializer.Serialize(loan);
+                    var loanBytes = System.Text.Encoding.UTF8.GetBytes(loanJson);
+                    await _distributedCache.SetAsync(cacheKey, loanBytes, new Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
+                    });
                 }
 
                 return loan;

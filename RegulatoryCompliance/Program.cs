@@ -48,8 +48,12 @@ builder.Services.AddMiniProfiler(options =>
     options.RouteBasePath = "/profiler";
 });
 
-// Add in-memory caching
-builder.Services.AddMemoryCache();
+// Add Redis distributed caching
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetValue<string>("Redis:Configuration") ?? "localhost:6379";
+    options.InstanceName = "RegulatoryComplianceRedis";
+});
 
 // Add API versioning
 builder.Services.AddApiVersioning(options =>
