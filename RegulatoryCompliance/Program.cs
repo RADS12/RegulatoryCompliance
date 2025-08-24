@@ -1,22 +1,20 @@
+using AspNetCoreRateLimit;
 using Common.Configuration;
-using Common.Helpers;
 using Common.Interfaces;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Caching.Memory;
 using RuleEngine.Facade;
 using RuleEngine.Interfaces;
-using SalManager;
-using SqlManager;
-using SqlManager.Interfaces;
+// using RegulatoryCompliance.Services; // Removed due to missing namespace or assembly reference
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Compact;
-using Serilog.Sinks.SystemConsole;
 using Serilog.Sinks.Seq;
-using FluentValidation.AspNetCore;
-using FluentValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.ApplicationInsights.Extensibility;
+using Serilog.Sinks.SystemConsole;
 using StackExchange.Profiling;
-using Microsoft.Extensions.Caching.Memory;
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -30,10 +28,20 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Add health checks
 builder.Services.AddHealthChecks();
+
 // Add Application Insights telemetry
 builder.Services.AddApplicationInsightsTelemetry();
+
+// Add AspNetCoreRateLimit configuration
+builder.Services.AddOptions();
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+builder.Services.AddInMemoryRateLimiting();
+
 // Add MiniProfiler for performance profiling
 builder.Services.AddMiniProfiler(options =>
 {
@@ -42,6 +50,7 @@ builder.Services.AddMiniProfiler(options =>
 
 // Add in-memory caching
 builder.Services.AddMemoryCache();
+
 // Add API versioning
 builder.Services.AddApiVersioning(options =>
 {
@@ -55,6 +64,7 @@ builder.Services.AddVersionedApiExplorer(options =>
     options.GroupNameFormat = "'v'VVV";
     options.SubstituteApiVersionInUrl = true;
 });
+
 // JWT Authentication configuration
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "YourSuperSecretKeyHere";
 builder.Services.AddAuthentication(options =>
@@ -76,12 +86,11 @@ builder.Services.AddAuthentication(options =>
 builder.Host.UseSerilog();
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<RegulatoryCompliance.Validation.HighCostTestInputValidator>();
 builder.Services.Configure<AppSettingsConfig>(builder.Configuration.GetSection("AppSettings"));
-builder.Services.AddSingleton<IAppSettingsService, AppSettingsService>();
+builder.Services.AddSingleton<IAppSettingsService, Common.Helpers.AppSettingsService>();
 builder.Services.AddSingleton<SqlManager.Interfaces.IDbConnectionFactory, SqlManager.SqlDbConnectionFactory>();
 
 builder.Services.AddTransient<IRegulatoryRuleFacade, SafeHarborRuleFacade>();
@@ -135,6 +144,8 @@ var app = builder.Build();
 app.MapHealthChecks("/health");
 // Optionally, expose Application Insights telemetry configuration for advanced scenarios
 var telemetryConfig = app.Services.GetRequiredService<TelemetryConfiguration>();
+// Enable IP rate limiting middleware
+app.UseIpRateLimiting();
 // Use MiniProfiler middleware
 app.UseMiniProfiler();
 // Enable authentication middleware

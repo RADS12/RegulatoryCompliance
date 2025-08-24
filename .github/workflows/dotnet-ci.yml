@@ -1,0 +1,41 @@
+# .NET CI/CD Pipeline for RegulatoryCompliance
+# This workflow builds, tests, and deploys your .NET project on push or PR to main branches.
+
+name: .NET CI/CD
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore RegulatoryCompliance/RegulatoryCompliance.csproj
+
+      - name: Build
+        run: dotnet build RegulatoryCompliance/RegulatoryCompliance.csproj --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test RegulatoryCompliance.Tests/RegulatoryCompliance.Tests.csproj --no-build --verbosity normal
+
+      # Add deployment steps here (e.g., Azure Web App, Docker, etc.)
+      # - name: Deploy
+      #   run: echo "Deploy step goes here"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: RegulatoryCompliance-artifacts
+          path: RegulatoryCompliance/bin/Release/

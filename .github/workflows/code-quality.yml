@@ -1,0 +1,37 @@
+# .NET Code Quality Workflow
+# This workflow runs analyzers, linters, and code formatters on every push/PR.
+
+name: Code Quality
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore RegulatoryCompliance/RegulatoryCompliance.csproj
+
+      - name: Run analyzers (FxCop, StyleCop)
+        run: dotnet build RegulatoryCompliance/RegulatoryCompliance.csproj --configuration Release --no-restore
+
+      - name: Run dotnet-format
+        run: dotnet format RegulatoryCompliance/RegulatoryCompliance.csproj --verify-no-changes
+
+      - name: Upload code quality report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-quality-report
+          path: RegulatoryCompliance/RegulatoryCompliance/bin/Release/

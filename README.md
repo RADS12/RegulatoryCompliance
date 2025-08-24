@@ -1,64 +1,68 @@
-**Project Overview:**
 
-I developed this project using 
-- Object-Oriented Programming (OOP)
-- SOLID principles
-- Key design patterns
-- Multithread-safe operations
-- Robust caching mechanism
+# RegulatoryCompliance
 
--------
+## Overview
+RegulatoryCompliance is a robust .NET API for regulatory rule validation, health checks, monitoring, and secure endpoints. It follows best practices for validation, error handling, logging, authentication, configuration, and CI/CD.
 
-**Object-Oriented Principles:**
+## Getting Started
+1. **Clone the repository:**
+	```sh
+	git clone https://github.com/RADS12/RegulatoryCompliance.git
+	cd RegulatoryCompliance
+	```
+2. **Install .NET 8 SDK:**
+	- Download from https://dotnet.microsoft.com/download/dotnet/8.0
+3. **Restore dependencies:**
+	```sh
+	dotnet restore RegulatoryCompliance/RegulatoryCompliance.csproj
+	```
+4. **Build the project:**
+	```sh
+	dotnet build RegulatoryCompliance/RegulatoryCompliance.csproj
+	```
+5. **Run the API:**
+	```sh
+	dotnet run --project RegulatoryCompliance/RegulatoryCompliance.csproj
+	```
 
-**Inheritance / Polymorphism:** Implemented through base and derived input classes.
+## Features
+- Input validation (FluentValidation, DataAnnotations)
+- Global exception handling (ProblemDetails)
+- Structured logging (Serilog, enrichers, sinks)
+- JWT authentication & OpenAPI security
+- Health checks (`/health` endpoint)
+- Application Insights monitoring
+- Performance profiling (MiniProfiler)
+- In-memory caching
+- CI/CD automation (GitHub Actions)
+- Code quality tools (StyleCop, FxCop, dotnet-format)
 
-**Encapsulation:** Data and logic are contained within dedicated classes.
+## API Documentation
+- Swagger UI available at `/swagger`
+- XML comments and example requests/responses
+- JWT Bearer authentication supported in Swagger
 
-**Polymorphism:** Each rule encapsulates distinct logic and behavior.
+## Developer Guide
+- **Add new rules:** Implement `IRegulatoryRuleFacade` in `BusinessManager/Facade/`
+- **Add new models:** Place in `Common/Models/`
+- **Add new controllers:** Place in `RegulatoryCompliance/Controllers/`
+- **Add tests:** Use xUnit in `RegulatoryCompliance.Tests/`
+- **Configure settings:** Edit `appsettings.json` and use environment variables for secrets
 
-**Abstraction:** Simplified complex systems by exposing only essential features and hiding internal implementation details.
+## CI/CD
+- Automated build, test, and code quality checks via GitHub Actions
+- See `.github/workflows/` for pipeline definitions
 
--------
+## Health & Monitoring
+- `/health` endpoint for health checks
+- Application Insights for telemetry
 
-**SOLID Principles:**
+## Security
+- JWT authentication for protected endpoints
+- OpenAPI security definitions for Swagger
 
-**Single Responsibility:** Each class serves a single purpose (e.g., test input, configuration, test logic). Each rule is self-contained.
+## Contributing
+Pull requests are welcome! Please follow code style guidelines and add tests for new features.
 
-**Open/Closed:** New regulatory tests and rules can be added without modifying existing code, enhancing extensibility.
-
-**Liskov Substitution:** Derived test input classes are substitutable for their base types.
-
-**Interface Segregation:** Separate interfaces are used for configuration and composite tests, reducing unnecessary dependencies.
-
-**Dependency Inversion:** High-level modules depend on abstractions, not concretions. The engine and services rely on interfaces.
-
------------
-
-**Design Patterns:**
-
-**Strategy Pattern:** Regulatory rules are implemented as strategies, selected dynamically at runtime.
-
-**Repository Pattern:** Abstracts database operations, improving data access flexibility.
-
-**Composite Pattern:** State regulatory Rule can contain several sub-tests
-
-**Facade Pattern:** Simplifies execution of various regulatory compliance rules.
-
-**Dependency Injection:** Injects configuration and services, promoting testability and maintainability.
-
-**Future Additions:** Factory Pattern, Chain of Responsibility Pattern, Observer Pattern, Adapter Pattern, etc.
-
--------
-
-**Additional Features**
-
-**Configuration Management:** Uses POCO classes and dependency injection to load settings from appsettings.json, supporting microservice-ready configurations.
-
-**Caching:** Enhances application performance by reducing redundant operations.
-
-**SemaphoreSlim:** Ensures thread-safe operations and manages concurrent access for multithreading.
-
-**Dapper:** Automatically map query results to objects, reducing boilerplate code, improving productivity, and offering significantly faster data access compared to manual ADO.NET operations.
-
---------
+## License
+MIT
