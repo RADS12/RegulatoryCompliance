@@ -8,7 +8,7 @@ namespace Common.Models
         {
             TestType = RegulatoryTestType.SafeHarbor;
         }
-        public int LoanNumber { get; set; }
+        //public int LoanNumber { get; set; }
         public int RegulatoryComplianceId { get; set; }
 
         public bool DoesPassSafeHarborTest;

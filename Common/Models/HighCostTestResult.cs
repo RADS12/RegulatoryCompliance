@@ -8,7 +8,7 @@ namespace Common.Models
         {
            TestType = RegulatoryTestType.HighCost;
         }
-        public int LoanNumber { get; set; }
+        //public new int LoanNumber { get; set; }
         public int RegulatoryComplianceId { get; set; }
         public bool PassFedHCFeesTest { get; set; }
         public bool PassFedHCTest { get; set; }

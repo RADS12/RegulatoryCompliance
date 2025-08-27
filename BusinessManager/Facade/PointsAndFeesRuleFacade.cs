@@ -5,7 +5,7 @@ using RuleEngine.Interfaces;
 
 namespace RuleEngine.Facade
 {
-    //This code should be inseperate API running the rules
+    //This code should be in separate API running the rules
     //This is a demo for simplicity.
     public class PointsAndFeesRuleFacade : IRegulatoryRuleFacade
     {

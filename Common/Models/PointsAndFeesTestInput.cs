@@ -6,7 +6,7 @@ namespace Common.Models
     public class PointsAndFeesTestInput : RegulatoryTestInput
     {
     [Required]
-    public int LoanNumber { get; set; }
+    public new int LoanNumber { get; set; }
 
     [Range(0, double.MaxValue)]
     public decimal PointsPaid { get; set; }

@@ -9,11 +9,11 @@ namespace Common.Models
         {
         }
 
-    [Required]
-    public int LoanNumber { get; set; }
+    // [Required]
+    // public int LoanNumber { get; set; }
 
     [Required]
-    public string State { get; set; }
+    public required string State { get; set; }
 
     public decimal? InitialLockDateIndex { get; set; }
 

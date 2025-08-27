@@ -9,8 +9,8 @@ namespace Common.Models
         {
         }
 
-    [Required]
-    public int LoanNumber { get; set; }
+    //[Required]
+    //public int LoanNumber { get; set; }
 
     [Required]
     public bool HasPrepaymentPenalty { get; set; }

@@ -7,7 +7,7 @@ namespace RuleEngine.Interfaces
     public interface ISafeHarborFacade : IRegulatoryRulesEngine
     {
         RegulatoryTestType RuleType { get; }
-        //gulatoryTestResult RunTest(RegulatoryTestInput input, AppSettingsConfig config);
+        //Regulatory TestResult RunTest(RegulatoryTestInput input, AppSettingsConfig config);
 
         SafeHarborTestResults RunTest(RegulatoryTestInput input, AppSettingsConfig config);
     }

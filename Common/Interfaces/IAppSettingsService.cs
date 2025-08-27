@@ -19,9 +19,9 @@ namespace Common.Interfaces
         //string HighCostService_ClientSecret { get; }
         //string HighCostService_TokenURL { get; }
 
-        //string PoinAndFeesService_ClientId { get; }
-        //string PoinAndFeesService_ClientSecret { get; }
-        //string PoinAndFeesService_TokenURL { get; }
+        //string PointAndFeesService_ClientId { get; }
+        //string PointAndFeesService_ClientSecret { get; }
+        //string PointAndFeesService_TokenURL { get; }
 
         //string StateRegulatoryService_ClientId { get; }
         //string StateRegulatoryService_ClientSecret { get; }

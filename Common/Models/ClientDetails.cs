@@ -6,11 +6,11 @@ namespace Common.Models
     {
         private int ClientId { get; set; }
         private int LoanNumber { get; set; }
-        private string FirstName { get; set; }
-        private string LastName { get; set; }
-        private string AddressLine1 { get; set; }
-        private string AddressLine2 { get; set; }
-        private string City { get; set; }
-        private string ZipCode { get; set; }
+         public required string FirstName { get; set; }
+         public required string LastName { get; set; }
+         public required string AddressLine1 { get; set; }
+         public required string AddressLine2 { get; set; }
+         public required string City { get; set; }
+         public required string ZipCode { get; set; }
     }
 }

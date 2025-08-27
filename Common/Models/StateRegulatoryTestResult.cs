@@ -8,7 +8,7 @@ namespace Common.Models
         {
             TestType = RegulatoryTestType.StateRegulatoryTest;
         }
-        public int LoanNumber { get; set; }
+        //public int LoanNumber { get; set; }
         public int RegulatoryComplianceId { get; set; }
 
         public long StateRegulatoryTestInputId { get; set; }

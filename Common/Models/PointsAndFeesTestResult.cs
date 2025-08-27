@@ -9,7 +9,7 @@ namespace Common.Models
             TestType = RegulatoryTestType.PointsAndFees;
         }
 
-        public int LoanNumber { get; set; }
+        //public int LoanNumber { get; set; }
         public int RegulatoryComplianceId { get; set; }
 
         public decimal AffiliatedAppraisalFeeAmount { get; set; }
