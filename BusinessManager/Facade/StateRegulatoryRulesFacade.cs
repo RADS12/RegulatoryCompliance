@@ -32,10 +32,8 @@ namespace RuleEngine.Facade
             return new RegulatoryTestResult
             {
                 TestType = RuleType,
-                //IsPassed = passed,
-                //Message = passed
-                //    ? $"State ({stateInput.State}) Test Passed"
-                //    : $"State ({stateInput.State}) Test Failed"
+                IsPassed = false, // or set based on your logic
+                Message = "State test result message not set."
             };
         }
     }
