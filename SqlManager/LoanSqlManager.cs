@@ -29,25 +29,27 @@ namespace SalManager
             {
                 using var connection = _connectionFactory.CreateConnection();
 
-                var parameters = new DynamicParameters();
-                parameters.Add("@LoanNumber", loan.LoanNumber);
-                parameters.Add("@LoanStatus", loan.LoanStatus);
-                parameters.Add("@IsQualifiedLoan", loan.IsQualifiedLoan);
-                parameters.Add("@LoanAmount", loan.LoanAmount);
-                parameters.Add("@TermYears", loan.TermYears);
-                parameters.Add("@InterestRate", loan.InterestRate);
-                parameters.Add("@APR", loan.APR);
-                parameters.Add("@ClosingDate", loan.ClosingDate);
-                parameters.Add("@LienPosition", loan.LienPosition);
-                parameters.Add("@Occupancy", loan.Occupancy);
-                parameters.Add("@PropertyCity", loan.PropertyCity);
-                parameters.Add("@PropertyCounty", loan.PropertyCounty);
-                parameters.Add("@PropertyState", loan.PropertyState);
-                parameters.Add("@TitleCompany", loan.TitleCompany);
-                parameters.Add("@IsHELOC", loan.IsHELOC);
-                parameters.Add("@LoanType", loan.LoanType);
-                //parameters.Add("@AuditId", loan.AuditId);
-                parameters.Add("@NewLoanId", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                #region Build Parameters
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@LoanNumber", loan.LoanNumber);
+                    parameters.Add("@LoanStatus", loan.LoanStatus);
+                    parameters.Add("@IsQualifiedLoan", loan.IsQualifiedLoan);
+                    parameters.Add("@LoanAmount", loan.LoanAmount);
+                    parameters.Add("@TermYears", loan.TermYears);
+                    parameters.Add("@InterestRate", loan.InterestRate);
+                    parameters.Add("@APR", loan.APR);
+                    parameters.Add("@ClosingDate", loan.ClosingDate);
+                    parameters.Add("@LienPosition", loan.LienPosition);
+                    parameters.Add("@Occupancy", loan.Occupancy);
+                    parameters.Add("@PropertyCity", loan.PropertyCity);
+                    parameters.Add("@PropertyCounty", loan.PropertyCounty);
+                    parameters.Add("@PropertyState", loan.PropertyState);
+                    parameters.Add("@TitleCompany", loan.TitleCompany);
+                    parameters.Add("@IsHELOC", loan.IsHELOC);
+                    parameters.Add("@LoanType", loan.LoanType);
+                    //parameters.Add("@AuditId", loan.AuditId);
+                    parameters.Add("@NewLoanId", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                #endregion
 
                 var response = await connection.ExecuteAsync(
                     "sp_CreateLoanBase", 
