@@ -24,7 +24,7 @@ public class codingPractice {
     public bool IsPrimeNumber(int num)
     {
         if (num == 1) return false;
-        if (num == 2 ) return true;
+        if (num == 2) return true;
 
         for (i = 3; i < (int)Math.Sqrt(num); i++)
         {
@@ -34,30 +34,51 @@ public class codingPractice {
         return true;
     }
 
-     static string ReverseString(string str)
+    //Fibonacci = 1, 2, 3, 5, 8, 13...
+    public static List<int> Return Fibonacci(int max)
+    {
+        List<int> lst = new List<int>();
+        int a = 0;
+        int b = 1;
+        
+        lst.add(a);
+        lst.add(b);
+        
+        for(var i = 1; i <= 45; i++)
+        {
+            c = a + b;
+            lst.Add(num);
+            a = b;
+            b = c;
+        }
+
+        return lst;
+    }
+
+    static string ReverseString(string str)
     {
         char[] chars = str.ToCharArray();
         Array.Reverse(chars);
         return new string(chars);
     }
 
-    
+
     //n square issue
     public string GetFirstNonRepeatingChar(string str)
-	{
-		if (string.IsNullOrEmpty(str)) return null;
-		
-		for (var i = 0; i < str.Length; i++)
-		{
+    {
+        if (string.IsNullOrEmpty(str)) return null;
+
+        for (var i = 0; i < str.Length; i++)
+        {
             var newString = str.Substring(i + 1);
 
-			if (!newString.Contains(str[i]) && str.IndexOf(str[i]) == i)
-				return str[i].ToString();
-				
-		}
-		
-		return null;
-	}
+            if (!newString.Contains(str[i]) && str.IndexOf(str[i]) == i)
+                return str[i].ToString();
+
+        }
+
+        return null;
+    }
     // Just n time
     public static string GetFirstNonRepeatingCharUnicode(string str)
     {
@@ -97,7 +118,7 @@ public class codingPractice {
         while (set.Contains(i))
             i++;
 
-        return i;   
+        return i;
     }
 
     // Input: "abcabcbb" → Output: 3 (substring "abc")
@@ -189,32 +210,32 @@ public class codingPractice {
         return stack.Count == 0; // must be empty if valid
     }
 
-    
+
     //Given an array of integers, calculate the ratios of its elements that are , , and . 
     // Print the decimal value of each fraction on a new line with 6 places after the decimal.
     //-4 3 -9 0 4 1
     public static void plusMinus(List<int> arr)
     {
         var count = arr.Count;
-        
+
         int pos = 0;
         int zero = 0;
-        int neg = 0; 
-        
-        for(var i = 0; i < count; i++)
+        int neg = 0;
+
+        for (var i = 0; i < count; i++)
         {
             if (arr[i] > 0)
                 pos++;
-            else if (arr[i] == 0) 
+            else if (arr[i] == 0)
                 zero++;
             else
                 neg++;
         }
-        
+
         decimal posRatio = (decimal)pos / count;
         decimal zeroRatio = (decimal)neg / count;
         decimal negRatio = (decimal)zero / count;
-                
+
         Console.WriteLine(posRatio.ToString("F6"));
         Console.WriteLine(zeroRatio.ToString("F6"));
         Console.WriteLine(negRatio.ToString("F6"));
@@ -229,7 +250,7 @@ public class codingPractice {
     public static void staircase(int n)
     {
         string sym = "";
-        for(var i = n; i >= 1; i--)
+        for (var i = n; i >= 1; i--)
         {
             sym += "#";
             Console.WriteLine(sym.PadLeft(n));
@@ -246,15 +267,15 @@ public class codingPractice {
     public static void miniMaxSum(List<int> arr)
     {
         arr.Sort();
-        
+
         long sum = 0;
         for (int i = 0; i < arr.Count; i++)
         {
             sum += arr[i];
         }
-        
-        
-        Console.WriteLine($"{sum - arr[arr.Count-1]} {sum - arr[0]}");
+
+
+        Console.WriteLine($"{sum - arr[arr.Count - 1]} {sum - arr[0]}");
     }
 
     /*
@@ -269,13 +290,13 @@ public class codingPractice {
         //candles.Reverse();
         var cnt = 0;
         var highest = candles.Max();
-        
-        for(var i = 0; i < candles.Count; i++)
+
+        for (var i = 0; i < candles.Count; i++)
         {
             if (candles[i] == highest)
                 cnt++;
         }
-        
+
         return cnt;
     }
 
@@ -283,9 +304,9 @@ public class codingPractice {
     {
         var lastTwo = s.Substring(s.Length - 2);
         int num = 0;
-        
+
         s = s.Substring(0, s.Length - 2);
-        
+
         if (lastTwo == "AM" && s.Substring(0, 2) == "12")
             s = "00" + s.Substring(2);
 
@@ -294,7 +315,7 @@ public class codingPractice {
             num = int.Parse(s.Substring(0, 2)) + 12;
             s = num.ToString() + s.Substring(2);
         }
-        
+
         return s;
     }
 
@@ -365,53 +386,128 @@ public class codingPractice {
 
 
     public void AddNote(String state, String name) {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new Exception ("Name cannot be empty");
-                
-            if (string.IsNullOrWhiteSpace(state))
-                throw new Exception ("State cannot be empty");
-            else if (state != "completed" || state != "active" || state != "others")
-                throw new Exception ("Invalid state {state}");
-            
-            var dic = new Dictionary<string, string>();
-            
-            dic.Add(name, state);
-            
-            
-        }
-        
-    
-        public List<String> GetNotes(String state) {
-            
-            List<String> lst = new List<string>();
-            
-            if (string.IsNullOrWhiteSpace(state))
-                throw new Exception ("state cannot be empty");
-            else if (state != "completed" || state != "active" || state != "others")
-                throw new Exception ("Invalid state {state}");
-            
-            foreach (var d in dic)
-            {
-                if (d.Value == "completed")
-                    lst.Add(d.Key);
-                else if (d.Value == "active")
-                    lst.Add(d.Key);  
-                else if (d.Value == "others")
-                    lst.Add(d.Key);  
-            }
-            
-            return lst;
-        }
-    } 
+        if (string.IsNullOrWhiteSpace(name))
+            throw new Exception("Name cannot be empty");
 
-    public static int sansaXor(List<int> arr)
+        if (string.IsNullOrWhiteSpace(state))
+            throw new Exception("State cannot be empty");
+        else if (state != "completed" || state != "active" || state != "others")
+            throw new Exception("Invalid state {state}");
+
+        var dic = new Dictionary<string, string>();
+
+        dic.Add(name, state);
+
+
+    }
+
+
+    public List<String> GetNotes(String state) {
+
+        List<String> lst = new List<string>();
+
+        if (string.IsNullOrWhiteSpace(state))
+            throw new Exception("state cannot be empty");
+        else if (state != "completed" || state != "active" || state != "others")
+            throw new Exception("Invalid state {state}");
+
+        foreach (var d in dic)
+        {
+            if (d.Value == "completed")
+                lst.Add(d.Key);
+            else if (d.Value == "active")
+                lst.Add(d.Key);
+            else if (d.Value == "others")
+                lst.Add(d.Key);
+        }
+
+        return lst;
+    }
+
+
+    static int sansaXor(List<int> arr)
     {
         int n = arr.Count;
-        if ((n & 1) == 0) return 0; 
+        if ((n & 1) == 0) return 0;
         int x = 0;
         for (int i = 0; i < n; i += 2)
             x ^= arr[i];
         return x;
     }
 
+    static void HackRank_Day2_Print(String[] args)
+    {
+        int i = 4;
+        double d = 4.0;
+        string s = "HackerRank ";
+
+
+        // Declare second integer, double, and String variables.
+        int i2 = 0;
+        double d2 = 0.0;
+        string s2 = "";
+
+        // Read and save an integer, double, and String to your variables.
+        i2 = int.Parse(Console.ReadLine());
+        d2 = double.Parse(Console.ReadLine());
+        s2 = Console.ReadLine();
+
+        // Print the sum of both integer variables on a new line.
+        Console.WriteLine((i + i2).ToString());
+
+        // Print the sum of the double variables on a new line.
+        Console.WriteLine((d + d2).ToString("F1"));
+
+        // Concatenate and print the String variables on a new line
+        // The 's' variable above should be printed first.
+        Console.WriteLine(s + s2);
+    }
+
+    /*
+    You have a long list of tasks that you need to do today. To accomplish task  you need  minutes, 
+    and the deadline for this task is . You need not complete a task at a stretch. 
+    You can complete a part of it, switch to another task, and then switch back.
+
+    You've realized that it might not be possible to complete all the tasks by their deadline. 
+    So you decide to do them in such a manner that the maximum amount by which a task's completion time 
+    overshoots its deadline is minimized.
+
+    */
+    static void TaskDifference()
+    {
+        int n = int.Parse(Console.ReadLine()!.Trim());
+
+        // Store tasks as (d, p)
+        var tasks = new List<(int d, int p)>(n);
+
+        for (int k = 0; k < n; k++)
+        {
+            var parts = Console.ReadLine()!.Trim().Split();
+            int d = int.Parse(parts[0]);   // deadline
+            int p = int.Parse(parts[1]);   // duration (processing time)
+            tasks.Add((d, p));
+
+            // Recompute minimal max overshoot for all tasks seen so far
+            tasks.Sort((a, b) =>
+            {
+                int cmp = a.d.CompareTo(b.d);
+                if (cmp != 0) return cmp;
+                // (Optional) tie-break shorter p first; doesn’t change correctness
+                return a.p.CompareTo(b.p);
+            });
+
+            long t = 0;           // current finish time
+            long maxOver = 0;     // maximal overshoot so far
+
+            foreach (var job in tasks)
+            {
+                t += job.p;                      // finish time of this job
+                long over = t - job.d;           // lateness (can be negative)
+                if (over > maxOver) maxOver = over;
+            }
+
+            // overshoot is max(0, max lateness)
+            Console.WriteLine(Math.Max(0, maxOver));
+        }
+    }
 }
