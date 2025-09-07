@@ -1,0 +1,187 @@
+// See https://aka.ms/new-console-template for more information
+using GetUsers2;
+
+var lstUsers = new List<Users> {
+
+    new Users { UserName = "Hari", IsActive = true, Date = new DateTime(2020, 1, 1) },
+    new Users { UserName = "Sowmya", IsActive = true, Date = new DateTime(2020, 1, 1) },
+    new Users { UserName = "Srividhya", IsActive = true, Date = new DateTime(2020, 1, 1) },
+    new Users { UserName = "Rad", IsActive = true, Date = new DateTime(2024, 1, 1) },
+
+};
+
+var filterDate = new DateTime(2023, 1, 1);
+
+var newUsers = lstUsers.Where(x => x.IsActive && x.Date <= filterDate).Select(n => n.UserName).OrderBy(u => u).ToList();
+
+foreach (var user in newUsers)
+{
+    Console.WriteLine(user);
+}
+
+Console.Write("Enter your name: ");
+string name = Console.ReadLine();
+Console.Write("Enter your address: ");
+string address = Console.ReadLine();
+
+Console.WriteLine($"Hello, {name}! Welcome to the C# Console App. {address} ");
+
+Console.WriteLine($"------------------------------------");
+var num = 13;
+var result = IsPrimeNumber(num);
+Console.WriteLine($" {num} is a primenumber {result}");
+Console.WriteLine($"------------------------------------");
+
+Console.WriteLine($"------------------------------------");
+var palindrome = "Radar";
+var isPalindromeResult = isPalindrome(palindrome);
+Console.WriteLine($" {palindrome} is a Palindrome {isPalindromeResult}");
+Console.WriteLine($"------------------------------------");
+
+Console.WriteLine($"------------------------------------");
+var reverse = "Rad";
+var reverseResult = ReverseString1(reverse);
+Console.WriteLine($" {reverse} is reversed to {reverseResult}");
+Console.WriteLine($"------------------------------------");
+
+Console.WriteLine($"------------------------------------");
+var reverseWords = "Reverse words";
+var reverseWordsResult = ReverseWords(reverseWords);
+Console.WriteLine($" {reverseWords} is reversed to {reverseWordsResult}");
+Console.WriteLine($"------------------------------------");
+
+Console.WriteLine($"------------------------------------");
+var str1 = "String 1";
+var str2 = "String 2";
+var stringAddedResult = addStrings(str1, str2);
+Console.WriteLine($" Added string - {stringAddedResult}");
+Console.WriteLine($"------------------------------------");
+
+Console.WriteLine($"------------------------------------ ");
+int[] ar = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+var target = 6;
+var FindSumEqualToTargetResult = FindSumEqualToTarget(ar, target);
+Console.WriteLine($" Added string - {FindSumEqualToTargetResult[0]}, {FindSumEqualToTargetResult[1]}");
+Console.WriteLine($"------------------------------------");
+
+
+
+static bool IsPrimeNumber(int number)
+{
+    if (number <= 1) return false;
+    if (number == 2) return true;
+    if (number % 2 == 0) return false;
+
+    for (int i = 3; i < Math.Sqrt(number); i++)
+    {
+        if (number % 2 == 0)
+            return false;
+    }
+
+    return true;
+}
+
+static bool isPalindrome(string str)
+{
+    var left = 0;
+    var right = str.Length - 1;
+
+    str = str.ToUpper();
+
+    while (left < right)
+    {
+        if (str[left] != str[right])
+        {
+            Console.WriteLine($"Left {str[left]}; Right {str[right]}");
+            return false;
+        }
+
+        left++;
+        right--;
+    }
+    ;
+
+    return true;
+}
+
+static string ReverseString1(string str)
+{
+    char[] arr = str.ToCharArray();
+    Array.Reverse(arr);
+
+    return new string(arr);
+}
+
+static string ReverseWords(string str)
+{
+    var arr = str.Split(' ');
+    Array.Reverse(arr);
+
+    return string.Join(" ", arr);
+}
+
+static void fizzBuzz(int n)
+{
+    for (int i = 1; i <= n; i++)
+    {
+        if (i % 3 == 0 && i % 5 == 0)
+            Console.WriteLine("FizzBuzz");
+        else if (i % 3 == 0)
+            Console.WriteLine("Fizz");
+        else if (i % 5 == 0)
+            Console.WriteLine($"Buzz");
+        else
+            Console.WriteLine($"{i}");
+
+    }
+}
+
+static void Main(string[] args)
+{
+    var line1 = System.Console.ReadLine().Trim();
+    var N = Int32.Parse(line1);
+
+    for (var i = 0; i < N; i++)
+    {
+        System.Console.WriteLine("hello world");
+    }
+}
+
+// Find pair of socks from int list - 10 20 20 10 10 30 50 10 20
+static int sockMerchant(int n, int[] arr)
+{
+    var unmatched = new HashSet<int>();
+    int pairs = 0;
+    foreach (var sock in arr)
+    {
+        if (!unmatched.Add(sock))
+        {
+            unmatched.Remove(sock);
+            pairs++;
+        }
+    }
+    return pairs;
+}
+
+
+static List<int> FindSumEqualToTarget(int[] arr, int target)
+{
+    for (int i = 0; i == arr.Length; i++)
+    {
+        if (i <= target)
+        {
+            for (int j = 1; j == arr.Length; j++)
+            {
+                if (arr[i] + arr[j] == target)
+                {
+                    var result = new List<int>() { i, j };
+                    return result;
+                }
+            }
+        }
+    }
+
+    return new List<int>();
+}
+
+

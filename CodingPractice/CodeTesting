@@ -1,0 +1,71 @@
+//Online biding app
+//Auction online, users can look at and bid
+//at end select the best bid
+// Bid class, 
+//4 prop - UserId, ItemId, BidPrice, BidTime
+//Function - loop bid object, slecte the highest bid and return the highest id
+// Multiple  high price, earliet time
+//
+
+public class BidItem
+{
+    public int UserId { get; set; }
+    public int ItemId { get; set; }
+    public decimal BidPrice { get; set; }
+    public DateTime BidTime { get; set; }
+}
+
+public sealed class Bid
+{
+    public string UserId { get; set; }
+    public string ItemId { get; set; }
+    public decimal BidPrice { get; set; }
+    public DateTime BidTime { get; set; }
+}
+
+public static class Auction
+{
+    // Returns the winning bid for a given item
+    public static Bid SelectWinningBid(IEnumerable<Bid> bids, string itemId)
+    {
+        return bids
+            .Where(b => b.ItemId == itemId)
+            .OrderByDescending(b => b.BidPrice)  // highest price first
+            .ThenBy(b => b.BidTime)              // earliest time wins ties
+            .FirstOrDefault();
+    }
+
+    // Just return the winning UserId
+    public static string SelectWinningUserId(IEnumerable<Bid> bids, string itemId)
+    {
+        return SelectWinningBid(bids, itemId)?.UserId;
+    }
+}
+
+public static class Auction
+{
+    // Returns the winning Bid (null if none for the given itemId)
+    public static Bid SelectWinningBid(IEnumerable<Bid> bids, string itemId)
+    {
+        Bid best = null;
+
+        foreach (var b in bids)
+        {
+            if (b == null || b.ItemId != itemId) continue;
+
+            if (best == null
+                || b.BidPrice > best.BidPrice
+                || (b.BidPrice == best.BidPrice && b.BidTime < best.BidTime))
+            {
+                best = b;
+            }
+        }
+
+        return best;
+    }
+
+    // Convenience: returns the winning UserId (null if none)
+    public static string SelectWinningUserId(IEnumerable<Bid> bids, string itemId)
+        => SelectWinningBid(bids, itemId)?.UserId;
+}
+
