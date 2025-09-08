@@ -35,7 +35,7 @@ public class codingPractice {
     }
 
     //Fibonacci = 1, 2, 3, 5, 8, 13...
-    public static List<int> Return Fibonacci(int max)
+    public static List<int> Fibonacci(int max)
     {
         List<int> lst = new List<int>();
         int a = 0;
@@ -62,6 +62,23 @@ public class codingPractice {
         return new string(chars);
     }
 
+    public int SmallestMissingPositiveIntegre(List<int> arr)
+    {
+        arr.Sort();
+        int result = 1;
+
+        for (var i = 0; i < arr.Count; i++)
+        {
+            if (arr[i] < result) continue;
+
+            if (arr[i] == result)
+                result++;
+            else
+                break;
+
+            return result;
+        }
+    }
 
     //n square issue
     public string GetFirstNonRepeatingChar(string str)
@@ -172,8 +189,6 @@ public class codingPractice {
 
         return Array.Empty<int>(); // no solution found
     }
-
-    Input: "()" → Output: true
 
     // Input: "()[]{}" → Output: true
     // Input: "(]" → Output: false

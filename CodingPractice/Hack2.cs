@@ -27,7 +27,11 @@ namespace Solution
                 .OrderBy(x => x.Company);
 
             var dict = new Dictionary<string, int>();
-            foreach (var x in result) dict[x.Company] = x.AvgAge;
+            foreach (var x in result)
+            {
+                dict[x.Company] = x.AvgAge;
+            }
+
             return dict;
             
         }

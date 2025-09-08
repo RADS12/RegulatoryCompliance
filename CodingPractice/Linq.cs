@@ -40,6 +40,13 @@ public class LinqTests()
             .Select(g => g.ToList())
             .ToList();
     }
+
+    //Parallel Sum: Split a large array and compute its sum in parallel using Task or Parallel.For
+    public static long ParallelSum(int[] data)
+    {
+        long total = myArray.AsParallel().Sum(x => (long)x);
+        return total;
+    }
     
 }
 
